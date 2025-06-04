@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manhã de Futebol - Informações do Atleta </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '⚽';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            opacity: 0.3;
+            animation: spin 20s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 40px 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2E7D32;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #E8F5E8;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border: 2px solid #E8F5E8;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
+        }
+        
+        .radio-option:hover {
+            border-color: #4CAF50;
+            background: #F1F8E9;
+        }
+        
+        .radio-option input[type="radio"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .radio-option input[type="radio"]:checked + span {
+            color: #2E7D32;
+            font-weight: 600;
+        }
+        
+        .radio-option:has(input:checked) {
+            border-color: #4CAF50;
+            background: #E8F5E8;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .info-box {
+            background: #E3F2FD;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 25px 0;
+            font-size: 14px;
+            color: #1565C0;
+        }
+        
+        .required {
+            color: #F44336;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px 30px;
+            background: #F8F9FA;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .success-message {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Informações do Atleta</h1>
+            <p>Ajuda-me a preparar tudo para te receber no plantel!</p>
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            🎉 Obrigado pela tua informação, vemos-nos no relvado!
+        </div>
+        
+        <form class="form-container" action="https://formspree.io/f/mvgrgayg" method="POST" id="rsvpForm">
+            <div class="info-box">
+                <strong>📋 Informação do Atleta:</strong> Este formulário serve apenas para agilizar a organização do evento e de todos os atletas envolvidos.
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="parentName">Nome do Agente do Atleta (Pai/Mãe) <span class="required">*</span></label>
+                    <input type="text" id="parentName" name="parent_name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="kidName">Nome do Atleta <span class="required">*</span></label>
+                    <input type="text" id="kidName" name="child_name" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Endereço de Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Contacto Telefónico <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Precisas de boleia no dia do evento? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="pickup_needed" value="yes" required>
+                        <span>🚗 Sim, preciso de boleia </span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="pickup_needed" value="no" required>
+                        <span>👋 Não, vemos-nos lá</span>
+                    </label>
+                </div>
+                <label>Se for necessário boleia, atempadamente entrarei em contacto para confirmar e combinar os detalhes</label>
+            </div>
+            
+            <div class="form-group">
+                <label for="additionalInfo">Comentários ou sugestões são bem vindas! Algo mais que eu deva saber para a preparação deste evento </label>
+                <textarea id="additionalInfo" name="additional_info" placeholder="Algo que queiras que eu saiba..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                ⚽ Submeter Informação
+            </button>
+        </form>
+        
+        <div class="footer">
+            Obrigado por me ajudares a planear este evento! 🎉
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Sending...';
+            submitBtn.disabled = true;
+            
+            // Submit form
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Show success message
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.querySelector('.form-container').style.display = 'none';
+                    
+                    // Scroll to top
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            }).catch(error => {
+                alert('Oops! There was a problem submitting your form. Please try again or contact us directly.');
+                console.error('Error:', error);
+            }).finally(() => {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+        
+        document.querySelectorAll('input[name="pickup_needed"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const pickupPersonField = document.getElementById('pickupPerson').parentElement;
+                if (this.value === 'yes') {
+                    pickupPersonField.style.display = 'block';
+                    document.getElementById('pickupPerson').required = true;
+                } else {
+                    pickupPersonField.style.display = 'none';
+                    document.getElementById('pickupPerson').required = false;
+                    document.getElementById('pickupPerson').value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
