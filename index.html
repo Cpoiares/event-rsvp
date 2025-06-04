@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manhã de Futebol - Informações do Atleta </title>
+    <title>Manhã de Futebol - Confirmação de Presença</title>
     <style>
         * {
             margin: 0;
@@ -235,27 +235,27 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Informações do Atleta</h1>
-            <p>Ajuda-me a preparar tudo para te receber no plantel!</p>
+            <h1>Confirmação de Presença</h1>
+            <p>Ajuda-nos a planear o evento perfeito para o teu pequeno atleta!</p>
         </div>
         
         <div class="success-message" id="successMessage">
-            🎉 Obrigado pela tua informação, vemos-nos no relvado!
+            🎉 Obrigado! A tua confirmação foi enviada com sucesso. Mal podemos esperar para te ver na manhã de futebol!
         </div>
         
         <form class="form-container" action="https://formspree.io/f/mvgrgayg" method="POST" id="rsvpForm">
             <div class="info-box">
-                <strong>📋 Informação do Atleta:</strong> Este formulário serve apenas para agilizar a organização do evento e de todos os atletas envolvidos.
+                <strong>📋 Informação Rápida:</strong> Este formulário ajuda-nos a organizar o transporte e atividades. Uma semana antes do evento entrarei em contacto com cada responsável de modo a confirmar todos os detalhes.
             </div>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="parentName">Nome do Agente do Atleta (Pai/Mãe) <span class="required">*</span></label>
+                    <label for="parentName">Nome do Pai/Mãe/Responsável <span class="required">*</span></label>
                     <input type="text" id="parentName" name="parent_name" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="kidName">Nome do Atleta <span class="required">*</span></label>
+                    <label for="kidName">Nome da Criança <span class="required">*</span></label>
                     <input type="text" id="kidName" name="child_name" required>
                 </div>
             </div>
@@ -267,38 +267,42 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="phone">Contacto Telefónico <span class="required">*</span></label>
+                    <label for="phone">Número de Telemóvel <span class="required">*</span></label>
                     <input type="tel" id="phone" name="phone" required>
                 </div>
             </div>
             
             <div class="form-group">
-                <label>Precisas de boleia no dia do evento? <span class="required">*</span></label>
+                <label>A tua criança precisa de boleia para ir/vir do evento? <span class="required">*</span></label>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="pickup_needed" value="yes" required>
-                        <span>🚗 Sim, preciso de boleia </span>
+                        <span>🚗 Sim, precisa de boleia</span>
                     </label>
                     <label class="radio-option">
                         <input type="radio" name="pickup_needed" value="no" required>
-                        <span>👋 Não, vemos-nos lá</span>
+                        <span>👋 Não, nós tratamos do transporte</span>
                     </label>
                 </div>
-                <label>Se for necessário boleia, atempadamente entrarei em contacto para confirmar e combinar os detalhes</label>
             </div>
             
             <div class="form-group">
-                <label for="additionalInfo">Comentários ou sugestões são bem vindas! Algo mais que eu deva saber para a preparação deste evento </label>
-                <textarea id="additionalInfo" name="additional_info" placeholder="Algo que queiras que eu saiba..."></textarea>
+                <label for="restrictions">Alguma alergia alimentar, restrições ou necessidades especiais?</label>
+                <textarea id="restrictions" name="restrictions" placeholder="Por favor informa-nos sobre alergias, restrições alimentares ou qualquer coisa que devamos saber..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="additionalInfo">Comentários adicionais ou perguntas?</label>
+                <textarea id="additionalInfo" name="additional_info" placeholder="Alguma coisa mais que gostarias que soubéssemos..."></textarea>
             </div>
             
             <button type="submit" class="submit-btn">
-                ⚽ Submeter Informação
+                ⚽ Confirmar Presença
             </button>
         </form>
         
         <div class="footer">
-            Obrigado por me ajudares a planear este evento! 🎉
+            Obrigado por nos ajudares a planear uma manhã incrível de futebol! 🎉
         </div>
     </div>
     
@@ -309,7 +313,7 @@
             // Show loading state
             const submitBtn = document.querySelector('.submit-btn');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '⏳ Sending...';
+            submitBtn.innerHTML = '⏳ A enviar...';
             submitBtn.disabled = true;
             
             // Submit form
@@ -331,7 +335,7 @@
                     throw new Error('Network response was not ok');
                 }
             }).catch(error => {
-                alert('Oops! There was a problem submitting your form. Please try again or contact us directly.');
+                alert('Ups! Houve um problema ao enviar o formulário. Por favor tenta novamente ou contacta-nos diretamente.');
                 console.error('Error:', error);
             }).finally(() => {
                 // Reset button
@@ -340,6 +344,7 @@
             });
         });
         
+        // Show/hide pickup person field based on pickup selection
         document.querySelectorAll('input[name="pickup_needed"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 const pickupPersonField = document.getElementById('pickupPerson').parentElement;
