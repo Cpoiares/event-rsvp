@@ -18,6 +18,30 @@
             padding: 20px;
             line-height: 1.6;
         }
+
+        .contact-info {
+            background: linear-gradient(135deg, #F1F8E9, #E8F5E8);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #2E7D32;
+            border: 2px solid #81C784;
+            position: relative;
+        }
+        
+        .contact-info::before {
+            position: absolute;
+            top: -8px;
+            left: 10px;
+            background: white;
+            padding: 2px 4px;
+            border-radius: 50%;
+            font-size: 16px;
+        }
+        
+        .contact-info strong {
+            color: #1B5E20;
+        }
         
         .container {
             max-width: 600px;
@@ -236,7 +260,7 @@
     <div class="container">
         <div class="header">
             <h1>Confirmação de Presença</h1>
-            <p>Ajuda-nos a planear o evento perfeito para o teu pequeno atleta!</p>
+            <p>Ajuda-me a planear o evento perfeito para os pequenos atletas!</p>
         </div>
         
         <div class="success-message" id="successMessage">
@@ -245,7 +269,14 @@
         
         <form class="form-container" action="https://formspree.io/f/mvgrgayg" method="POST" id="rsvpForm">
             <div class="info-box">
-                <strong>📋 Informação Rápida:</strong> Este formulário ajuda-nos a organizar o transporte e atividades. Uma semana antes do evento entrarei em contacto com cada responsável de modo a confirmar todos os detalhes.
+                <strong>📋 Informação Rápida:</strong> Este formulário ajuda-me a organizar o transporte e atividades dos pequenos, contudo todos as atividades (e snacks) estarão disponiveis para os graúdos também. Os jogos terão uma duração aproximada de 2 horas, todos estarão livres pela hora do almoço. Haverá snacks e águas para manter a energia durante a manhã.<br> Uma semana antes do evento entrarei em contacto com cada responsável de modo a confirmar todos os detalhes.
+                <br><br>
+                <div class="contact-info">
+                    <strong>📞 Contactos:</strong><br>
+                        Telemóvel: +351 935 729 905<br>
+                        Email: carlos.poiares2@gmail.com
+                </div>
+            
             </div>
             
             <div class="form-row">
